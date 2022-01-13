@@ -13,12 +13,14 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
-
-from inven import views
+from django.urls import path, include
+from django.views.generic import RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('inven/', views.index)
-]
+    path('inven/', include('inven.urls')),
+    path('', RedirectView.as_view(url='/inven/', permanent=True)), #아무것도 없는 주소로 오면 /inven/으로 리다이렉션
+]  # + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
