@@ -4,6 +4,7 @@ from inven import views
 urlpatterns = [
     path('', views.index, name="index"),
     path('All/', views.All, name="All"),
+    # path('user/', views.user, name="user"),
     path('Computer/', views.Computer, name="Computer"),
     path('Screen/', views.Screen, name="Screen"),
     path('Medical/', views.Medical, name="Medical"),

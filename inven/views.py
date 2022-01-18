@@ -2,6 +2,9 @@ from django.shortcuts import render
 
 
 # Create your views here.
+from inven.models import User
+
+
 def index(request):
     context = {
 
@@ -10,10 +13,12 @@ def index(request):
 
 
 def All(request):
+    user_list = User.objects.all()
     context = {
-
+        'user_list': user_list
     }
-    return render(request, 'All.html', context=context)
+    print(len(user_list))
+    return render(request, 'All.html', context)
 
 
 def Computer(request):
@@ -49,3 +54,7 @@ def others2(request):
 
     }
     return render(request, 'others2.html', context=context)
+
+#
+# def user(request): # 모든 유저가 사용하는 장비 조회
+#     return User.objects.all()

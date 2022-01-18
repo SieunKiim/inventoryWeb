@@ -52,8 +52,16 @@
                 </nav>
                 <!-- Page content-->
                 <div class="container-fluid">
-                    <h1 class="mt-4">ALL Tab Opend</h1>
-                    <p>HI</p>
+                    <button class="btn btn-primary" id="add_user" type="button" onclick=location.href='add/'>Add User</button>
+                    {% if user_list %}
+                        <ul>
+                        {% for user in user_list %}
+                            <a>{{ user.name }}</a><br>
+                        {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>유저가 없습니다.</p>
+                    {% endif %}
                 </div>
             </div>
         </div>
