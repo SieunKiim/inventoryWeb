@@ -52,8 +52,15 @@
                 </nav>
                 <!-- Page content-->
                 <div class="container-fluid">
-                    <h1 class="mt-4">Computer Tab Opend</h1>
-                    <p></p>
+                    {% if computer_list %}
+                        <ul>
+                        {% for computer in computer_list %}
+                            <a>{{ computer }}</a><br>
+                        {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>유저가 없습니다.</p>
+                    {% endif %}
                 </div>
             </div>
         </div>

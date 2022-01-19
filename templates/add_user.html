@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>LAMEDITECH</title>
+        <title>Simple Sidebar - Start Bootstrap Template</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href='{% static "assets/favicon.ico" %}' />
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -16,7 +16,7 @@
         <div class="d-flex" id="wrapper">
             <!-- Sidebar-->
             <div class="border-end bg-white" id="sidebar-wrapper">
-                <div class="sidebar-heading border-bottom bg-light">INVENTORY</div>
+                <div class="sidebar-heading border-bottom bg-light">Start Bootstrap</div>
                 <div class="list-group list-group-flush">
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'All' %}">All</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'Computer' %}">Computer</a>
@@ -52,16 +52,12 @@
                 </nav>
                 <!-- Page content-->
                 <div class="container-fluid">
-                    <button class="btn btn-primary" id="add_user" type="button" onclick="location.href= '{% url 'add_user' %}'">Add User</button>
-                    {% if user_list %}
-                        <ul>
-                        {% for user in user_list %}
-                            <a>{{ user.name }}</a><br>
-                        {% endfor %}
-                        </ul>
-                    {% else %}
-                        <p>유저가 없습니다.</p>
-                    {% endif %}
+                    <h2>사람 추가</h2>
+                    <form action="{% url 'add_user' %}" method="post">
+                    {% csrf_token %}
+                    <textarea name="content" id="content" rows="15"></textarea>
+                    <input type="submit" value="답변등록">
+                    </form>
                 </div>
             </div>
         </div>

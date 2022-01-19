@@ -52,8 +52,15 @@
                 </nav>
                 <!-- Page content-->
                 <div class="container-fluid">
-                    <h1 class="mt-4">Screen Tab Opend</h1>
-                    <p></p>
+                    {% if screen_list %}
+                        <ul>
+                        {% for tv_monitor in screen_list %}
+                            <a>{{ tv_monitor }}</a><br>
+                        {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>유저가 없습니다.</p>
+                    {% endif %}
                 </div>
             </div>
         </div>
