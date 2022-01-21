@@ -16,7 +16,7 @@ def all(request):
     context = {
         'user_list': user_list
     }
-    print(len(user_list))
+    print(request)
     return render(request, 'All.html', context)
 
 
@@ -58,8 +58,7 @@ def others2(request):
 
 
 def add_user(request):
-    if request.method == 'POST':
-        print("등록 POST")
+    if request.method == 'POST':        print("등록 POST")
     context = {
 
     }
