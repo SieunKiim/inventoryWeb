@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from django.http import JsonResponse
 # Create your views here.
 from inven.models import User, Tool, Computer, Screen
 
@@ -11,14 +11,19 @@ def index(request):
     return render(request, 'index.html', context=context)  # index.html에 넘겨줄 떄 같이 넘어갈 context 지정
 
 
-def all(request):
-    user_list = User.objects.all()
+def all(request):  #모든 장비 조회
+    tools = Tool.objects.all()
     context = {
-        'user_list': user_list
+        'tools': tools
     }
-    print(request)
     return render(request, 'All.html', context)
 
+
+
+    # user_list = []
+    # for index_all, user in enumerate(users, start=1):
+    #     user_list.append({'id': index_all, 'user': user.name, '부서': user.department})
+    # return JsonResponse(user_list, safe=False)
 
 def computer(request):
     computer_list = Computer.objects.all()
@@ -43,11 +48,13 @@ def medical(request):
     return render(request, 'Medical.html', context=context)
 
 
-def others1(request):
-    context = {
+def inven_user(request):
 
+    users = User.objects.all()
+    context = {
+        'users': users
     }
-    return render(request, 'others1.html', context=context)
+    return render(request, 'InvenUsers.html', context=context)
 
 
 def others2(request):
@@ -58,7 +65,8 @@ def others2(request):
 
 
 def add_user(request):
-    if request.method == 'POST':        print("등록 POST")
+    if request.method == 'POST':
+        print("등록 POST")
     context = {
 
     }

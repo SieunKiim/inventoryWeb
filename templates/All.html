@@ -22,7 +22,7 @@
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'Computer' %}">Computer</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'Screen' %}">Screen</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'Medical' %}">Medical</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'others1' %}">others1</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'inven_user' %}">User</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'others2' %}">others2</a>
                 </div>
             </div>
@@ -52,15 +52,14 @@
                 </nav>
                 <!-- Page content-->
                 <div class="container-fluid">
-                    <button class="btn btn-primary" id="add_user" type="button" onclick="location.href= '{% url 'add_user' %}'">Add User</button>
-                    {% if user_list %}
+                    {% if tools %}
                         <ul>
-                        {% for user in user_list %}
-                            <a>{{ user.name }}</a><br>
+                        {% for tool in tools %}
+                            <a>{{ tool }}</a><br>
                         {% endfor %}
                         </ul>
                     {% else %}
-                        <p>유저가 없습니다.</p>
+                        <p>장비가 없습니다.</p>
                     {% endif %}
                 </div>
             </div>
