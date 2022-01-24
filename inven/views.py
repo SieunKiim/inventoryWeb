@@ -58,10 +58,11 @@ def inven_user(request):
 
 
 def others2(request):
-    context = {
-
-    }
-    return render(request, 'others2.html', context=context)
+    tools = Tool.objects.all()
+    tool_list = []
+    for index_all, tool in enumerate(tools, start=1):
+        tool_list.append({'id': index_all, 'user': tool.tool_name, '부서': tool.user.department})
+    return JsonResponse(tool_list, safe=False)
 
 
 def add_user(request):
