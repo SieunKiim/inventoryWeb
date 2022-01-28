@@ -12,53 +12,66 @@ def index(request):
 
 
 def all(request):  # 모든 장비 조회
-    # tools = Tool.objects.all()
-    # context = {
-    #     'tools': tools
-    # }
-    # return render(request, 'All.html', context)
-
-    # users = User.objects.all()
-    # user_list = []
-    # for index_all, user in enumerate(users, start=1):
-    #     user_list.append({'id': index_all, 'user': user.name, '부서': user.department})
-    # return JsonResponse(user_list, safe=False)
-
     tools = Tool.objects.all()
     tool_list = []
     for index_all, tool in enumerate(tools, start=1):
         tool_list.append(
-            {'id': index_all, 'user': tool.user.name, 'tool type': tool.tool_name, '부서': tool.user.department})
+            {'id': index_all, 'user': tool.user.name, 'tool_type': tool.tool_name, '부서': tool.user.department})
     return JsonResponse(tool_list, safe=False)
 
 
 def computer(request):
-    # computer_list = Computer.objects.all()
-    # context = {
-    #     'computer_list': computer_list
-    # }
-    # return render(request, 'Computer.html', context)
-
     computers = Computer.objects.all()
     computer_list = []
-    for index_com, computer in enumerate(computers, start=1):
-        computer_list.append({'id': index_com, 'user': computer.tool.user.name, 'department': computer.tool.user.department})
+    for index_com, computer_each in enumerate(computers, start=1):
+        computer_list.append({
+            'user': computer_each.tool.user.name,  # 사용자
+            'department': computer_each.tool.user.department,  # 부서
+            'position': computer_each.tool.user.position,  # 직책
+            'OS': computer_each.OS,
+            'CPU': computer_each.CPU,
+            'RAM': computer_each.RAM,
+            'VGA': computer_each.VGA,
+            'SSD_HDD': computer_each.SSD_HDD
+        })
     return JsonResponse(computer_list, safe=False)
 
 
 def screen(request):
-    screen_list = Screen.objects.all()
-    context = {
-        'screen_list': screen_list
-    }
-    return render(request, 'Screen.html', context)
+    screens = Screen.objects.all()
+    screen_list = []
+    for index_screen, screen_each in enumerate(screens, start=1):
+        screen_list.append({
+            'user': screen_each.tool.user.name,  # 사용자
+            'department': screen_each.tool.user.department,  # 부서
+            'position': screen_each.tool.user.position,  # 직책
+            'size': screen_each.size,  # 크기 (inch)
+            'brand': screen_each.brand,  # 브랜드
+            'resolution': screen_each.resolution  # 해상도
+        })
+    return JsonResponse(screen_list, safe=False)
 
 
 def medical(request):
-    context = {
+    medicals = Screen.objects.all()
+    medicals_list = []
+    for index_medical, medical_each in enumerate(medicals, start=1):
+        medicals_list.append({
+            'user': medical_each.tool.user.name,  # 사용자
+            'department': medical_each.tool.user.department,  # 부서
+            'position': medical_each.tool.user.position,  # 직책
+            'name': medical_each.name,  # 세부 명칭
+            'details': medical_each.details  # 세부 정보
+        })
+    return JsonResponse(medicals_list, safe=False)
 
-    }
-    return render(request, 'Medical.html', context=context)
+
+def others(request):
+    tools = Tool.objects.all()
+    tool_list = []
+    for index_all, tool in enumerate(tools, start=1):
+        tool_list.append({'id': index_all, 'user': tool.tool_name, '부서': tool.user.department})
+    return JsonResponse(tool_list, safe=False)
 
 
 def inven_user(request):
@@ -67,14 +80,6 @@ def inven_user(request):
         'users': users
     }
     return render(request, 'InvenUsers.html', context=context)
-
-
-def others2(request):
-    tools = Tool.objects.all()
-    tool_list = []
-    for index_all, tool in enumerate(tools, start=1):
-        tool_list.append({'id': index_all, 'user': tool.tool_name, '부서': tool.user.department})
-    return JsonResponse(tool_list, safe=False)
 
 
 def add_user(request):

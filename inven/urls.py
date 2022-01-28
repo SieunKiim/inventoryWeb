@@ -8,6 +8,6 @@ urlpatterns = [
     path('Computer/', views.computer, name="Computer"),
     path('Screen/', views.screen, name="Screen"),
     path('Medical/', views.medical, name="Medical"),
+    path('Others/', views.others, name="Others"),
     path('inven_user/', views.inven_user, name="inven_user"),
-    path('others2/', views.others2, name="others2"),
 ]
