@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db import models
 
 
@@ -47,16 +49,19 @@ class Screen(models.Model):
 
 class Medical(models.Model):
     tool = models.ForeignKey(Tool, on_delete=models.CASCADE)
-    name = models.CharField(null=True, max_length=200)
+    medical_type = models.CharField(null=True, max_length=200)
     details = models.CharField(null=True, max_length=1000)
+    serial_Number = models.CharField(null=True, max_length=30)
+    man_date = models.DateField(default=datetime.now, blank=True)   # 생산 년도 (manufactured date)
 
     def __str__(self):
-        return self.name
+        return self.medical_type
 
 
 class Others(models.Model):
     tool = models.ForeignKey(Tool, on_delete=models.CASCADE)
-    details = models.CharField(null=True, max_length=1000)
+    other_tool_name = models.CharField(null=True, max_length=200)   # 기타 장비 이름
+    details = models.CharField(null=True, max_length=1000)  # 세부 사항
 
     def __str__(self):
-        return self.tool.tool_name
+        return self.other_tool_name
