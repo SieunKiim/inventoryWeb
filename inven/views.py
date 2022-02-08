@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 # Create your views here.
+from django.views.decorators.csrf import csrf_exempt
+
 from inven.models import User, Tool, Computer, Screen, Medical, Others
 
 
@@ -94,10 +96,20 @@ def inven_user(request):
     return render(request, 'InvenUsers.html', context=context)
 
 
+@csrf_exempt
 def add_user(request):  # 사용자 추가
     if request.method == 'POST':
-        print("등록 POST")
-    context = {
+        name = request.POST['name']
+        department = request.POST['department']
+        position = request.POST['position']
 
-    }
+        users = User(
+            name=name,
+            department=department,
+            position=position
+        )
+        users.save()
+
+        # 올바르다면 추가 + 추가 됐음을 알리는 alarm
+        # 잘못됐다면 오류처리
     return render(request, 'add_user.html')

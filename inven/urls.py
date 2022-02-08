@@ -4,7 +4,7 @@ from inven import views
 urlpatterns = [
     path('', views.index, name="index"),
     path('All/', views.all, name="All"),
-    path('user/add/', views.add_user, name="add_user"),  # 이게 맞아?
+    path('user/', views.add_user, name="add_user"),  # 이게 맞아?
     path('Computer/', views.computer, name="Computer"),
     path('Screen/', views.screen, name="Screen"),
     path('Medical/', views.medical, name="Medical"),
