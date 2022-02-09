@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import JsonResponse
 # Create your views here.
 from django.views.decorators.csrf import csrf_exempt
@@ -111,5 +111,6 @@ def add_user(request):  # 사용자 추가
         users.save()
 
         # 올바르다면 추가 + 추가 됐음을 알리는 alarm
-        # 잘못됐다면 오류처리
-    return render(request, 'add_user.html')
+        # 잘못 됐다면 오류 처리
+    # return render(request, '../All/')
+    return redirect('http://localhost:8080/inven/All/')
