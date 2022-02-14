@@ -1,5 +1,6 @@
+from django.contrib import messages
 from django.shortcuts import render, redirect
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 # Create your views here.
 from django.views.decorators.csrf import csrf_exempt
 
@@ -114,3 +115,154 @@ def add_user(request):  # 사용자 추가
         # 잘못 됐다면 오류 처리
     # return render(request, '../All/')
     return redirect('http://localhost:8080/inven/All/')
+
+
+@csrf_exempt
+def addComputer(request):  # 컴퓨터 추가
+    if request.method == 'POST':
+        user = request.POST['User']
+        tool_name = request.POST['tool']
+        os = request.POST['OS']
+        cpu = request.POST['CPU']
+        ram = request.POST['RAM']
+        vga = request.POST['VGA']
+        ssd_hdd = request.POST['SSD_HDD']
+
+        # 입력하고자 하는 사용자가 존재하지 않을 때
+        if not User.objects.filter(name=user).exists():
+            messages.warning(request, "사용자 없음")
+            print("사용자 없음")
+            msg = "<h1>존재하지 않는 사용쟈</h1> \n 뒤로 가서 사용자를 먼저 추가해주세요"
+            return HttpResponse(msg)
+
+        else:
+            tool = Tool(
+                tool_name=tool_name,
+                user=User.objects.get(name=user)
+            )
+            tool.save()
+
+            computer = Computer(
+                tool=tool,
+                OS=os,
+                CPU=cpu,
+                RAM=ram,
+                VGA=vga,
+                SSD_HDD=ssd_hdd,
+            )
+            computer.save()
+
+            return redirect('http://localhost:8080/inven/Computer/')
+            # return JsonResponse(request.POST, safe=False)
+
+
+@csrf_exempt
+def addScreen(request):  # 스크린 추가
+    if request.method == 'POST':
+        # print(request.POST)
+        user = request.POST['User']
+        tool_name = request.POST['tool']
+        size = request.POST['size']
+        brand = request.POST['brand']
+        resolution = request.POST['resolution']
+
+        # 입력하고자 하는 사용자가 존재하지 않을 때
+        if not User.objects.filter(name=user).exists():
+            messages.warning(request, "사용자 없음")
+            print("사용자 없음")
+            msg = "<h1>존재하지 않는 사용쟈</h1> \n 뒤로 가서 사용자를 먼저 추가해주세요"
+            return HttpResponse(msg)
+
+        else:
+            tool = Tool(
+                tool_name=tool_name,
+                user=User.objects.get(name=user)
+            )
+            tool.save()
+
+            screen_to_add = Screen(
+                tool=tool,
+                size=size,
+                brand=brand,
+                resolution=resolution
+            )
+            screen_to_add.save()
+
+            return redirect('http://localhost:8080/inven/Screen/')
+            # return JsonResponse(request.POST, safe=False)
+
+
+@csrf_exempt
+def addMedical(request):  # 의료 기기 추가
+    if request.method == 'POST':
+        # print(request.POST)
+        user = request.POST['User']
+        tool_name = request.POST['tool']
+        medical_type = request.POST['medical_type']
+        details = request.POST['details']
+        serial_Number = request.POST['serial_Number']
+        man_date = request.POST['man_date']
+
+        # 입력하고자 하는 사용자가 존재하지 않을 때
+        if not User.objects.filter(name=user).exists():
+            messages.warning(request, "사용자 없음")
+            print("사용자 없음")
+            msg = "<h1>존재하지 않는 사용쟈</h1> \n 뒤로 가서 사용자를 먼저 추가해주세요"
+            return HttpResponse(msg)
+
+        else:
+            tool = Tool(
+                tool_name=tool_name,
+                user=User.objects.get(name=user)
+            )
+            tool.save()
+
+            medical_to_add = Medical(
+                tool=tool,
+                medical_type=medical_type,
+                details=details,
+                serial_Number=serial_Number,
+                man_date=man_date
+            )
+            medical_to_add.save()
+
+            return redirect('http://localhost:8080/inven/Medical/')
+            # return JsonResponse(request.POST, safe=False)
+
+
+@csrf_exempt
+def addOthers(request):  # 기타 장비 추가
+    # 툴 네임이 툴로 저장되야하는게 맞을거야
+    print(request.POST)
+    if request.method == 'POST':
+        user = request.POST['User']
+        tool_name = request.POST['tool']
+        other_tool_name = request.POST['other_tool_name']
+        details = request.POST['details']
+
+
+        # 입력하고자 하는 사용자가 존재하지 않을 때
+        if not User.objects.filter(name=user).exists():
+
+            messages.warning(request, "사용자 없음")
+            print("사용자 없음")
+            msg = "<h1>존재하지 않는 사용쟈</h1> \n 뒤로 가서 사용자를 먼저 추가해주세요"
+            return HttpResponse(msg)
+
+        else:
+            tool = Tool(
+                tool_name=other_tool_name,
+                user=User.objects.get(name=user)
+            )
+            tool.save()
+
+            others_to_add = Others (
+                tool=tool,
+                other_tool_name=other_tool_name,
+                details=details
+
+            )
+            others_to_add.save()
+
+            return redirect('http://localhost:8080/inven/Others/')
+            # return JsonResponse(request.POST, safe=False)
