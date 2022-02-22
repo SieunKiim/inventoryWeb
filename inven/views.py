@@ -225,7 +225,7 @@ def addOthers(request):  # 기타 장비 추가
 
             messages.warning(request, "사용자 없음")
             print("사용자 없음")
-            msg = "<h1>존재하지 않는 사용쟈</h1> \n 뒤로 가서 사용자를 먼저 추가해주세요"
+            msg = "<h1>존재하지 않는 사용자</h1> \n 뒤로 가서 사용자를 먼저 추가해주세요"
             return HttpResponse(msg)
 
         else:
